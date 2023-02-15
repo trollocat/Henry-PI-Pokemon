@@ -1,6 +1,5 @@
 const axios = require("axios");
 const { Type } = require("../db");
-const { getTypeData } = require("./getTypeData");
 
 const saveTypeData = async (allTypes) => {
   try {
@@ -12,4 +11,4 @@ const saveTypeData = async (allTypes) => {
   }
 };
 
-module.exports = { getTypeData, saveTypeData };
+module.exports = saveTypeData;

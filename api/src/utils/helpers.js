@@ -1,7 +1,8 @@
 module.exports = {
   awaitConsoleLog: async (cb) => console.log(await cb()),
-  
+
   parsePokemon: (pokemon) => {
+    if (!pokemon) return false;
     return {
       id: pokemon.id,
       name: pokemon.forms[0].name,
@@ -13,5 +14,5 @@ module.exports = {
       height: pokemon.height,
       weight: pokemon.weight,
     };
-  }
+  },
 };

@@ -1,14 +1,21 @@
 const pokemonRouter = require("express").Router();
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
+const { validate } = require("uuid");
 const getPokemonData = require("../controllers/getPokemonData");
 const getPokemonById = require("../controllers/getPokemonById");
 const getPokemonByName = require("../controllers/getPokemonByName");
-const { validate } = require("uuid");
 
 pokemonRouter.post("/", async (req, res) => {
   try {
-    const { name, image, hp, attack, defense, speed, height, weight } =
+    const { name, image, hp, attack, defense, speed, height, weight, types } =
       req.body;
+
+    // find types ids on db
+    const filteredDbTypes = (await Type.findAll()).filter((type) =>
+      types.includes(type.name)
+    );
+    const typeIds = filteredDbTypes.map((type) => type.id);
+    console.log(typeIds);
 
     const newPokemon = await Pokemon.create({
       name,
@@ -21,7 +28,11 @@ pokemonRouter.post("/", async (req, res) => {
       weight,
     });
 
-    res.status(200).json(newPokemon);
+    // association
+    if(!typeIds.length) throw Error(`Types table must be initialized before Pokemons table.`)
+    await newPokemon.addTypes(typeIds);
+
+    res.status(200).json({...newPokemon.dataValues, types: types});
   } catch (error) {
     res.status(404).json(error.message);
   }
@@ -36,26 +47,23 @@ pokemonRouter.get("/", async (req, res) => {
     }
     // query
     const pokemon = await getPokemonByName(name);
-    if (!pokemon)
-      throw Error(`There is no pokemon named "${name}".`);
+    if (!pokemon) throw Error(`There is no pokemon named "${name}".`);
     return res.status(200).json(pokemon);
   } catch (error) {
     res.status(404).send(error.message);
   }
 });
 pokemonRouter.get("/:idPokemon", async (req, res) => {
-  // params
   const { idPokemon } = req.params;
   try {
     // first i have to validate the UUID
     if (validate(idPokemon)) {
-      // in db
+      // in db?
       const pokemonInDb = await Pokemon.findByPk(idPokemon);
       if (pokemonInDb) return res.status(200).json(pokemonInDb);
     }
-    if (!parseInt(idPokemon))
-      throw Error(`ID must be an integer or a UUID.`);
-    // in api
+    if (!parseInt(idPokemon)) throw Error(`ID must be an integer or a UUID.`);
+    // in api?
     const pokemonInApi = await getPokemonById(idPokemon);
     if (!pokemonInApi)
       throw Error(`The pokemon with ID ${idPokemon} does not exist.`);

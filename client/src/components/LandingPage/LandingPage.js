@@ -1,9 +1,9 @@
-import { Title, BigContainer, HomeLink } from "./StyledLandingRoute";
+import { Title, BigContainer, HomeLink } from "./StyledLandingPage";
 
 const Landing = () => {
   return (
     <BigContainer>
-      <Title>minimal pokedex</Title>
+      <Title>minimal pokédex</Title>
       <HomeLink to="/home">discover</HomeLink>
     </BigContainer>
   );

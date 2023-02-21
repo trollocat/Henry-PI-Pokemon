@@ -17,17 +17,25 @@ export const Title = styled.h1`
   font-size: 4rem;
   text-align: center;
   color: ${(props) => props.theme.colors.text};
-  text-shadow: 1px 2px 2px #e4404b;
+  text-shadow: 1px 2px 2px ${(props) => props.theme.colors.accent};
 `;
 
 export const HomeLink = styled(Link)`
   text-decoration: none;
-  font-size: 2em;
+  font-size: 2.5em;
   padding: 0.5rem;
+  border-radius: 0.3rem;
 
   color: ${(props) => props.theme.colors.text};
   border: ${(props) => props.theme.colors.text} solid 2px;
+  box-shadow: 1px 2px 2px ${(props) => props.theme.colors.accent};
   background-color: ${(props) => props.theme.colors.background};
-  
-  box-shadow: 1px 2px 2px #e4404b;
+  transition: ease-in-out 150ms;
+
+  &:hover {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    background-color: ${(props) => props.theme.colors.primary};
+    box-shadow: 1px 2px 8px ${(props) => props.theme.colors.text};
+  }
 `;

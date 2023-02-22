@@ -1,15 +1,19 @@
 const axios = require("axios");
-const { parsePokemon } = require("../utils/helpers");
+const { parsePokemon, getPokemonTypesFromDb } = require("../utils/helpers");
 const { Pokemon } = require("../db");
 
 const getPokemonByName = async (name) => {
   try {
     const nameNormalized = name.toLowerCase();
     // in db?
-    const dbPokemon = await Pokemon.findOne({
+    const pokemonInDb = await Pokemon.findOne({
       where: { name: nameNormalized },
     });
-    if (dbPokemon) return dbPokemon;
+    if (pokemonInDb) {
+      const pokemonTypes = await getPokemonTypesFromDb(pokemonInDb)
+      console.log(pokemonTypes);
+      return { ...pokemonInDb.dataValues, types: pokemonTypes };
+    }
 
     // in api?
     const rawPokemon = (
@@ -18,7 +22,7 @@ const getPokemonByName = async (name) => {
     const pokemon = parsePokemon(rawPokemon);
     return pokemon;
   } catch (error) {
-    return false;
+    console.log(error.message);
   }
 };
 

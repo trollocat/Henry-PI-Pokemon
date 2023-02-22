@@ -19,8 +19,8 @@ function App() {
 
   return (
     <Provider store={store}>
-      <StyledGlobal />
       <ThemeProvider theme={theme[appearance]}>
+      <StyledGlobal />
         <Router>
           <div className="App">
             <ThemeSwitcher toggleTheme={toggleTheme} />

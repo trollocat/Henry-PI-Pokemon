@@ -1,6 +1,7 @@
 const pokemonRouter = require("express").Router();
 const { Pokemon, Type } = require("../db");
 const { validate } = require("uuid");
+const { getPokemonTypesFromDb } = require("../utils/helpers");
 const getPokemonData = require("../controllers/getPokemonData");
 const getPokemonById = require("../controllers/getPokemonById");
 const getPokemonByName = require("../controllers/getPokemonByName");
@@ -10,12 +11,16 @@ pokemonRouter.post("/", async (req, res) => {
     const { name, image, hp, attack, defense, speed, height, weight, types } =
       req.body;
 
-    // find types ids on db
+    // find type ids on db
     const filteredDbTypes = (await Type.findAll()).filter((type) =>
       types.includes(type.name)
     );
     const typeIds = filteredDbTypes.map((type) => type.id);
     console.log(typeIds);
+
+    // association
+    if (!typeIds.length)
+      throw Error(`Types table must be initialized before Pokemons table.`);
 
     const newPokemon = await Pokemon.create({
       name,
@@ -27,12 +32,9 @@ pokemonRouter.post("/", async (req, res) => {
       height,
       weight,
     });
-
-    // association
-    if(!typeIds.length) throw Error(`Types table must be initialized before Pokemons table.`)
     await newPokemon.addTypes(typeIds);
 
-    res.status(200).json({...newPokemon.dataValues, types: types});
+    res.status(200).json({ ...newPokemon.dataValues, types: types });
   } catch (error) {
     res.status(404).json(error.message);
   }
@@ -60,7 +62,14 @@ pokemonRouter.get("/:idPokemon", async (req, res) => {
     if (validate(idPokemon)) {
       // in db?
       const pokemonInDb = await Pokemon.findByPk(idPokemon);
-      if (pokemonInDb) return res.status(200).json(pokemonInDb);
+
+      if (pokemonInDb) {
+        const pokemonTypes = await getPokemonTypesFromDb(pokemonInDb);
+        console.log(pokemonTypes);
+        return res
+          .status(200)
+          .json({ ...pokemonInDb.dataValues, types: pokemonTypes });
+      }
     }
     if (!parseInt(idPokemon)) throw Error(`ID must be an integer or a UUID.`);
     // in api?

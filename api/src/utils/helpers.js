@@ -13,6 +13,22 @@ module.exports = {
       speed: pokemon.stats[5].base_stat,
       height: pokemon.height,
       weight: pokemon.weight,
+      types: pokemon.types.map((type) => type.type.name),
     };
+  },
+
+  getPokemonTypesFromDb: async (pokemonInDb) => {
+    // returns ["electric", "fire"] with getTypes from the association table PokemonTypes
+    return await pokemonInDb
+      .getTypes()
+      .then((types) => {
+        const typeNames = types.map((type) => {
+          return type.dataValues.name;
+        });
+        return typeNames;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };

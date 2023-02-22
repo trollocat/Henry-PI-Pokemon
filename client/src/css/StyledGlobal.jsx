@@ -1,4 +1,4 @@
-// documentation: https://pablomonteserin.com/curso/react/styled-components/
+// styled-components documentation: https://pablomonteserin.com/curso/react/styled-components/
 
 import { createGlobalStyle } from "styled-components";
 
@@ -7,5 +7,7 @@ export const StyledGlobal = createGlobalStyle`
     height: 100%;
     margin: 0;
     font-family: roboto;
+    color: ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.background};
   }
 `;

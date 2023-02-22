@@ -1,11 +1,22 @@
 const axios = require("axios");
-const { awaitConsoleLog } = require("../utils/helpers");
+const { parsePokemon, getPokemonTypesFromDb } = require("../utils/helpers");
 const { Pokemon } = require("../db");
 
 const getPokemonData = async () => {
   try {
     // db pokemons
-    const dbPokemons = await Pokemon.findAll();
+    const pokemonsInDb = await Pokemon.findAll();
+    const pokemonsInDbCompletos = await Promise.all(
+      pokemonsInDb.map(async (pokemonInDb) => {
+        // get types thanks to associative table with a helper
+        const pokemonTypes = await getPokemonTypesFromDb(pokemonInDb);
+        const pokemonCompleto = {
+          ...pokemonInDb.dataValues,
+          types: pokemonTypes,
+        };
+        return pokemonCompleto;
+      })
+    );
 
     // api pokemons
     const pokemonPromises = [];
@@ -20,21 +31,9 @@ const getPokemonData = async () => {
     const rawPokemons = (await Promise.all(pokemonPromises)).map(
       (response) => response.data
     );
-    const parsedPokemons = rawPokemons.map((pokemon) => {
-      return {
-        id: pokemon.id,
-        name: pokemon.forms[0].name,
-        image: pokemon.sprites.other["official-artwork"].front_default,
-        hp: pokemon.stats[0].base_stat,
-        attack: pokemon.stats[1].base_stat,
-        defense: pokemon.stats[2].base_stat,
-        speed: pokemon.stats[5].base_stat,
-        height: pokemon.height,
-        weight: pokemon.weight,
-      };
-    });
+    const parsedPokemons = rawPokemons.map((pokemon) => parsePokemon(pokemon));
 
-    const allPokemons = [...dbPokemons, ...parsedPokemons];
+    const allPokemons = [...pokemonsInDbCompletos, ...parsedPokemons];
 
     return allPokemons;
   } catch (error) {

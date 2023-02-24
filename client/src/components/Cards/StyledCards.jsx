@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-    padding: 5rem 30rem 5rem 30rem;
+    padding: 2rem 30rem 2rem 30rem;
     `
 
 export const Wrapper = styled.div`

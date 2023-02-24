@@ -3,14 +3,26 @@ import { MainContainer, Wrapper } from "./StyledCards";
 import PokemonCard from "../PokemonCard/PokemonCard";
 
 const Cards = () => {
-  const pokemons = useSelector((state) => state.pokemons);
-  const types = useSelector((state) => state.types);
+  const { pokemons, currentPage } = useSelector((state) => state);
+  let slicedPokemons = pokemons?.slice(
+    (currentPage - 1) * 12,
+    currentPage * 12
+  );
+
   return (
     <MainContainer>
       <Wrapper>
-        {pokemons.length ? (
-          pokemons?.map((pokemon) => {
-            return <PokemonCard name={pokemon.name} image={pokemon.image} />;
+        {slicedPokemons.length ? (
+          slicedPokemons?.map((pokemon) => {
+            return (
+              <PokemonCard
+                key={pokemon.id}
+                name={pokemon.name}
+                image={pokemon.image}
+                id={pokemon.id}
+                types={pokemon.types}
+              />
+            );
           })
         ) : (
           <h1>loading pokemons...</h1>

@@ -1,12 +1,18 @@
-import Cards from "../Cards/Cards";
-import { BigContainer } from "./StyledHomePage";
+import { useTheme } from "styled-components";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+import Cards from "../Cards/Cards";
+import Paginate from "../Paginate/Paginate";
+
+import { BigContainer } from "./StyledHomePage";
+import { BackButton } from "../DetailPage/StyledDetailPage";
 import { fetchTypes, fetchPokemons } from "../../redux/actions";
+import { ReactComponent as Back } from "../../assets/icons/back.svg";
 
 const Home = () => {
+  const theme = useTheme();
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchTypes());
   }, [dispatch]);
@@ -17,7 +23,11 @@ const Home = () => {
 
   return (
     <BigContainer>
+      <BackButton to="/">
+        <Back height="3em" stroke={theme.colors.text} />
+      </BackButton>
       <Cards></Cards>
+      <Paginate></Paginate>
     </BigContainer>
   );
 };

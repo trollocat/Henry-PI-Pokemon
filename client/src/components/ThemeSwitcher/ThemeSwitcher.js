@@ -1,14 +1,14 @@
+import { useTheme } from "styled-components";
 import {
-  DropdownCircle,
-  InnerCircleContainer,
-  InnerCircle,
-  SampleText,
+  DropdownCircle
 } from "./StyledThemeSwitcher";
 import { useState } from "react";
+import { ReactComponent as Sun } from "../../assets/icons/sun.svg";
+import { ReactComponent as Moon } from "../../assets/icons/moon.svg";
 
 const ThemeSwitcher = ({ toggleTheme }) => {
+  const theme = useTheme();
   const [dropdownOpened, setDropdownOpened] = useState(false);
-
   const handleClick = () => {
     toggleTheme();
     setDropdownOpened(!dropdownOpened);
@@ -16,11 +16,9 @@ const ThemeSwitcher = ({ toggleTheme }) => {
 
   return (
     <DropdownCircle dropdown={dropdownOpened} onClick={handleClick}>
-      <InnerCircleContainer>
-        <InnerCircle>
-          <SampleText>Aa</SampleText>
-        </InnerCircle>
-      </InnerCircleContainer>
+      {theme.name === "light" && (<Sun width="3em" fill={theme.colors.text} />)}
+      {theme.name === "dark" && (<Moon width="3em" fill={theme.colors.text} />)}
+      
     </DropdownCircle>
   );
 };

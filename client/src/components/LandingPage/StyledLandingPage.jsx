@@ -35,7 +35,7 @@ export const HomeLink = styled(Link)`
   &:hover {
     padding-left: 4rem;
     padding-right: 4rem;
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.tertiary};
     box-shadow: 1px 2px 8px ${(props) => props.theme.colors.text};
   }
 `;

@@ -20,7 +20,7 @@ export const theme = {
       tertiary: "rgb(240, 165, 165)",
       accent: "rgb(228, 64, 75)",
     },
-    splashScreen: "splash-light.png",
+    splashScreen: "splash-light.webp",
   },
   dark: {
     name: "dark",
@@ -32,6 +32,6 @@ export const theme = {
       tertiary: "rgb(75, 46, 142)",
       accent: "rgb(80, 48, 198)",
     },
-    splashScreen: "splash-dark.png",
+    splashScreen: "splash-dark.webp",
   },
 };

@@ -2,16 +2,14 @@ import {
   ORDER,
   FILTER,
   FETCH_POKEMONS,
-  SET_CURRENT_PAGE,
   FETCH_TYPES,
+  SET_CURRENT_PAGE,
 } from "./actions";
 
 const initialState = {
-  allPokemons: [],
   pokemons: [],
   types: [],
   detail: [],
-  // dudosos
   currentPage: 1,
   totalPages: 0,
 };
@@ -27,13 +25,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         pokemons: payload,
-        totalPages: Math.ceil(payload.count / 12),
-      };
-    case SET_CURRENT_PAGE:
-      // no se si la voy a usar
-      return {
-        ...state,
-        currentPage: payload,
+        totalPages: Math.ceil(payload.length / 12),
       };
     case FILTER:
       return {
@@ -42,6 +34,11 @@ const reducer = (state = initialState, { type, payload }) => {
     case ORDER:
       return {
         ...state,
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: payload,
       };
     default:
       return { ...state };

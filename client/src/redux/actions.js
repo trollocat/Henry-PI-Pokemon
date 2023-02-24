@@ -13,7 +13,7 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const fetchTypes = () => {
   return async (dispatch) => {
     try {
-      const fetchedTypes = (await axios(`${URL}/types`)).data;
+      const fetchedTypes = (await axios(`${URL}/type`)).data;
       return dispatch({ type: FETCH_TYPES, payload: fetchedTypes });
     } catch (error) {
       console.log(error.message);

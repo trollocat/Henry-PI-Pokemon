@@ -1,22 +1,23 @@
-import PokeCardList from "../PokeCardList/PokeCardList";
+import Cards from "../Cards/Cards";
 import { BigContainer } from "./StyledHomePage";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchPokemons } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { fetchTypes, fetchPokemons } from "../../redux/actions";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const pokemons = useSelector((state) => state.pokemons);
+
+  useEffect(() => {
+    dispatch(fetchTypes());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchPokemons());
   }, [dispatch]);
 
-  console.log(pokemons);
-
   return (
     <BigContainer>
-      <PokeCardList></PokeCardList>
+      <Cards></Cards>
     </BigContainer>
   );
 };

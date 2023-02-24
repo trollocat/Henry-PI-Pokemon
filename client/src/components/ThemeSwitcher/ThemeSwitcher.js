@@ -3,8 +3,8 @@ import {
   DropdownCircle
 } from "./StyledThemeSwitcher";
 import { useState } from "react";
-import { ReactComponent as Sun } from "../../assets/icons/sun.svg";
-import { ReactComponent as Moon } from "../../assets/icons/moon.svg";
+import { ReactComponent as SunSVG } from "../../assets/icons/sun.svg";
+import { ReactComponent as MoonSVG } from "../../assets/icons/moon.svg";
 
 const ThemeSwitcher = ({ toggleTheme }) => {
   const theme = useTheme();
@@ -16,8 +16,8 @@ const ThemeSwitcher = ({ toggleTheme }) => {
 
   return (
     <DropdownCircle dropdown={dropdownOpened} onClick={handleClick}>
-      {theme.name === "light" && (<Sun width="3em" fill={theme.colors.text} />)}
-      {theme.name === "dark" && (<Moon width="3em" fill={theme.colors.text} />)}
+      {theme.name === "light" && (<SunSVG width="3em" fill={theme.colors.text} />)}
+      {theme.name === "dark" && (<MoonSVG width="3em" fill={theme.colors.text} />)}
       
     </DropdownCircle>
   );

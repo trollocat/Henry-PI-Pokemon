@@ -6,18 +6,22 @@ export const BigContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
+  gap: 32rem;
   min-height: 100%;
   background: url(${(props) => props.theme.splashScreen}) no-repeat center
     center fixed;
   background-size: cover;
+
+  font-family: Highway-Gothic;
 `;
 
 export const Title = styled.h1`
   margin: 0;
-  font-size: 4rem;
+  font-size: 6em;
   text-align: center;
   color: ${(props) => props.theme.colors.text};
-  text-shadow: 1px 2px 2px ${(props) => props.theme.colors.accent};
+  text-shadow: 1px 2px 2px ${(props) => props.theme.colors.accent},
+  0 0 6px ${(props) => props.theme.colors.background};
 `;
 
 export const HomeLink = styled(Link)`
@@ -33,8 +37,8 @@ export const HomeLink = styled(Link)`
   transition: ease-in-out 150ms;
 
   &:hover {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 2em;
+    padding-right: 2em;
     background-color: ${(props) => props.theme.colors.tertiary};
     box-shadow: 1px 2px 8px ${(props) => props.theme.colors.text};
   }

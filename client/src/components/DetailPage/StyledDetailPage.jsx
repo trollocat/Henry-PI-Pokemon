@@ -15,7 +15,8 @@ export const BackButton = styled(Link)`
   height: 4em;
   width: 4em;
   border-radius: 3em;
-  background-color: ${(props) => props.theme.colors.background};
+  stroke: ${(props) => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.primary};
   box-shadow: 1px 2px 1px 0 ${(props) => props.theme.colors.accent},
     0px 0px 8px -5px ${(props) => props.theme.colors.text};
   user-select: none;

@@ -21,6 +21,9 @@ const PokemonCard = ({ name, image, id, types }) => {
     setImageSrc(defaultPokemonImage);
   };
 
+  // auto scroll for type labels when they exceed 2
+  
+
   return (
     <CardContainer>
       <DetailLink to={`/detail/${id}`}>

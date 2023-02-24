@@ -1,4 +1,3 @@
-import { useTheme } from "styled-components";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -11,7 +10,6 @@ import { fetchTypes, fetchPokemons } from "../../redux/actions";
 import { ReactComponent as Back } from "../../assets/icons/back.svg";
 
 const Home = () => {
-  const theme = useTheme();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTypes());
@@ -24,7 +22,7 @@ const Home = () => {
   return (
     <BigContainer>
       <BackButton to="/">
-        <Back height="3em" stroke={theme.colors.text} />
+        <Back height="3em" />
       </BackButton>
       <Cards></Cards>
       <Paginate></Paginate>

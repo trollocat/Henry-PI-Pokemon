@@ -7,7 +7,7 @@ const getPokemonData = async () => {
     // db pokemons
     const pokemonsInDb = await Pokemon.findAll();
     const pokemonsInDbCompletos = await Promise.all(
-      pokemonsInDb.map(async (pokemonInDb) => {
+      pokemonsInDb.reverse().map(async (pokemonInDb) => {
         // get types thanks to associative table with a helper
         const pokemonTypes = await getPokemonTypesFromDb(pokemonInDb);
         const pokemonCompleto = {

@@ -18,10 +18,22 @@ export const CardContainer = styled.div`
   transition: transform cubic-bezier(0, 0.5, 0.85, 1) 230ms;
   outline: solid 0.3rem ${(props) => props.theme.colors.tertiary};
 
+  // 3d card (efecto de los cromos de steam para los pibardos)
+
+
   &:hover {
-    z-index: 99;
+    z-index: 10;
     cursor: pointer;
-    transform: scale(160%);
+    transform: scale(1.5);
+  }
+
+  & > :last-child > :last-child > :nth-child(n + 3) {
+    opacity: 0%;
+    pointer-events: none;
+  }
+
+  &:hover > :last-child > :last-child > :nth-child(n + 3) {
+    opacity: 100%;
   }
 `;
 
@@ -42,22 +54,10 @@ export const LabelWrapper = styled.div`
   max-height: 1.4rem;
   gap: 0.8em;
   padding: 0.5em;
-
-  &:hover {
-    & > :nth-child(n + 3) {
-      opacity: 100%;
-      transform: translateY(0%);
-    }
-  }
-
-  & > :nth-child(n + 3) {
-    opacity: 0%;
-    transform: translateY(-100%);
-  }
 `;
 
 export const Label = styled.img`
   z-index: 2;
   max-width: 4rem;
-  transition: 400ms ease-in-out;
+  transition: 300ms ease-in-out;
 `;

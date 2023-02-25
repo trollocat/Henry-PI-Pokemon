@@ -25,7 +25,7 @@ const PokemonCard = ({ name, image, id, types }) => {
   
 
   return (
-    <CardContainer>
+    <CardContainer className="card3d">
       <DetailLink to={`/detail/${id}`}>
         <PokemonTitle>{name}</PokemonTitle>
         <PokemonImage

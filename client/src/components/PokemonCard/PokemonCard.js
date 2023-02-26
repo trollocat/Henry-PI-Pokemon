@@ -36,7 +36,7 @@ const PokemonCard = ({ name, image, id, types }) => {
         ></PokemonImage>
         <LabelWrapper>
           {types.map((type) => (
-            <Label src={`/type_labels/${type}.png`} />
+            <Label key={type} src={`/type_labels/${type}.png`} />
           ))}
         </LabelWrapper>
       </DetailLink>

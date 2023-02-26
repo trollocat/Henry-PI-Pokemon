@@ -21,7 +21,7 @@ export const Title = styled.h1`
   text-align: center;
   color: ${(props) => props.theme.colors.text};
   text-shadow: 1px 2px 2px ${(props) => props.theme.colors.accent},
-  0 0 6px ${(props) => props.theme.colors.background};
+    0 0 6px ${(props) => props.theme.colors.background};
 `;
 
 export const HomeLink = styled(Link)`

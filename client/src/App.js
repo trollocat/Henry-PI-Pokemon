@@ -20,9 +20,9 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme[appearance]}>
-      <StyledGlobal />
         <Router>
           <div className="App">
+            <StyledGlobal />
             <ThemeSwitcher toggleTheme={toggleTheme} />
             <Routes />
           </div>

@@ -2,7 +2,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export const StyledGlobal = createGlobalStyle`
-  @import url('../assets/fonts/HWYGOTH.TTF');
 
   html, body, #root, .App {
     height: 100%;

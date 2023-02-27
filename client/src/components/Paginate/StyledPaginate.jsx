@@ -1,17 +1,16 @@
 import styled, { css } from "styled-components";
+import { WidgetA } from "../../css/DesignPatterns/WidgetA";
 
 export const PaginateContainer = styled.div`
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  bottom: 1.5rem;
+  bottom: 1.7rem;
   padding: 0.5rem;
-  border-radius: 0.3rem;
   gap: 1.5rem;
-  background-color: ${(props) => props.theme.colors.primary};
-  box-shadow: 1px 1px 4px 0px ${(props) => props.theme.colors.accent},
-    0px 0px 8px -5px ${(props) => props.theme.colors.text};
+  z-index: 2;
+  ${WidgetA}
 `;
 
 export const PageNumber = styled.button`

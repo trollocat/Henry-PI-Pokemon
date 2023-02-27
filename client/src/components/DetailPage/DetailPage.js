@@ -4,8 +4,8 @@ import {
   DetailContainer,
   PokemonImage,
   PokemonTitle,
-  BackButton,
 } from "./StyledDetailPage";
+import { BackButton } from "../BackButton/StyledBackButton";
 import { ReactComponent as BackSVG } from '../../assets/icons/back.svg';
 
 const Detail = () => {

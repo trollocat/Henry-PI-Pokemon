@@ -6,6 +6,7 @@ import {
   FETCH_POKEMONS,
   FETCH_TYPES,
   SET_CURRENT_PAGE,
+  SEARCH_POKEMONS,
 } from "./actions";
 
 const initialState = {
@@ -33,14 +34,26 @@ const reducer = (state = initialState, { type, payload }) => {
         pokemons: payload,
         totalPages: Math.ceil(payload.length / 12),
       };
+    case SEARCH_POKEMONS:
+      let resultPokemons = [];
+      if (payload === "") resultPokemons = state.orderedPokemons;
+      else {
+        resultPokemons = state.orderedPokemons?.filter(
+          (pokemon) => pokemon.name === payload
+        );
+      }
+      return {
+        ...state,
+        pokemons: resultPokemons,
+      };
     case ORDER_BY_NAME:
       let orderedPokemonsByName = [];
       if (payload === "asc")
-        orderedPokemonsByName = state.orderedPokemons.sort((a, b) =>
+        orderedPokemonsByName = state.pokemons.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
       if (payload === "desc")
-        orderedPokemonsByName = state.orderedPokemons.sort((a, b) =>
+        orderedPokemonsByName = state.pokemons.sort((a, b) =>
           b.name.localeCompare(a.name)
         );
       return {
@@ -50,9 +63,13 @@ const reducer = (state = initialState, { type, payload }) => {
     case ORDER_BY_ATTACK:
       let orderedPokemonsByAttack = [];
       if (payload === "asc")
-        orderedPokemonsByAttack = state.orderedPokemons.sort((a, b) => a.attack - b.attack);
+        orderedPokemonsByAttack = state.pokemons.sort(
+          (a, b) => a.attack - b.attack
+        );
       if (payload === "desc")
-        orderedPokemonsByAttack = state.orderedPokemons.sort((a, b) => b.attack - a.attack);
+        orderedPokemonsByAttack = state.pokemons.sort(
+          (a, b) => b.attack - a.attack
+        );
       return {
         ...state,
         orderedPokemons: orderedPokemonsByAttack,

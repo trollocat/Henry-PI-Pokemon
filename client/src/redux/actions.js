@@ -5,7 +5,7 @@ const URL = "http://localhost:3001";
 
 export const FETCH_TYPES = "FETCH_TYPES";
 export const FETCH_POKEMONS = "FETCH_POKEMONS";
-export const SEARCH_POKEMON = "SEARCH_POKEMON";
+export const SEARCH_POKEMONS = "SEARCH_POKEMONS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
@@ -36,7 +36,7 @@ export const fetchPokemons = () => {
 };
 
 export const searchPokemons = (name) => {
-  return { type: ORDER_BY_NAME, payload: name };
+  return { type: SEARCH_POKEMONS, payload: name };
 };
 
 export const orderPokemonsByName = (order) => {

@@ -12,7 +12,7 @@ const Cards = () => {
   return (
     <MainContainer>
       <Wrapper>
-        {slicedPokemons.length ? (
+        {slicedPokemons?.length ? (
           slicedPokemons?.map((pokemon) => {
             return (
               <PokemonCard

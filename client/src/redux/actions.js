@@ -49,8 +49,8 @@ export const orderPokemonsByAttack = (order) => {
 export const filterPokemonsByType = (types) => {
   return { type: FILTER_BY_TYPE, payload: types };
 };
-export const filterPokemonsBySource = (source) => {
-  return { type: FILTER_BY_SOURCE, payload: source };
+export const filterPokemonsBySource = (sources) => {
+  return { type: FILTER_BY_SOURCE, payload: sources };
 };
 
 export const setCurrentPage = (page) => {

@@ -49,18 +49,20 @@ export const PageArrowButton = styled.button`
   margin: 0;
   border: 0;
   border-radius: 0.2em;
+  stroke: ${(props) => props.theme.colors.text};
   fill: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.secondary};
 
   &:hover:not([disabled]) {
+    stroke: ${(props) => props.theme.colors.accent};
     fill: ${(props) => props.theme.colors.accent};
     background-color: ${(props) => props.theme.colors.tertiary};
     cursor: pointer;
   }
 
   &:disabled {
+    stroke: ${(props) => props.theme.colors.grayed};
     fill: ${(props) => props.theme.colors.grayed};
     background-color: unset;
-    opacity: 50%;
   }
 `;

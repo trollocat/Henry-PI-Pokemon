@@ -17,6 +17,12 @@ export const SelectOption = styled.div`
   gap: 0.5rem;
 `;
 
-export const Select = styled.select``;
+export const Select = styled.select`
+  font-family: "Signika";
+  font-size: 0.9em;
+`;
 
-export const Option = styled.option``;
+export const Option = styled.option`
+  font-family: "Signika";
+  font-size: 1.2em;
+`;

@@ -1,21 +1,38 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchPokemons } from "../../redux/actions";
-import { InputContainer, SearchInput } from "./StyledSearchBar";
+import { InputContainer, SearchInput, FancyButton } from "./StyledSearchBar";
+import { ReactComponent as SearchSVG } from "../../assets/icons/search.svg";
+import { ReactComponent as ClearSVG } from "../../assets/icons/clear.svg";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const onChangeHandler = (event) => {
     setSearch(event.target.value);
-  }
-  const onClickHandler = (event) => {
+  };
+  const onClickClearHandler = () => {
+    setSearch("");
+    dispatch(searchPokemons(""));
+  };
+  const onClickSendHandler = () => {
     dispatch(searchPokemons(search));
   };
   return (
     <InputContainer>
-      <SearchInput type="search" value={search} onChange={onChangeHandler}></SearchInput>
-      <button onClick={onClickHandler}>send</button>
+      <SearchInput
+        placeholder="search pokemon..."
+        value={search}
+        onChange={onChangeHandler}
+      ></SearchInput>
+      {search !== "" && (
+        <FancyButton onClick={onClickClearHandler}>
+          <ClearSVG width="1.8em" />
+        </FancyButton>
+      )}
+      <FancyButton onClick={onClickSendHandler}>
+        <SearchSVG width="1.8em" />
+      </FancyButton>
     </InputContainer>
   );
 };

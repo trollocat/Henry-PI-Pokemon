@@ -18,8 +18,7 @@ export const CardContainer = styled.div`
   transition: transform cubic-bezier(0, 0.5, 0.85, 1) 230ms;
   outline: solid 0.3rem ${(props) => props.theme.colors.tertiary};
 
-  // 3d card (efecto de los cromos de steam para los pibardos)
-
+  // [wip] 3d card effect (efecto de los cromos de steam para los pibardos)
 
   &:hover {
     z-index: 10;

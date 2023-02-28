@@ -22,7 +22,7 @@ const getPokemonData = async () => {
     const pokemonPromises = [];
     let i = 1;
 
-    while (i <= 80) {
+    while (i <= 120) {
       let apiData = await axios(`https://pokeapi.co/api/v2/pokemon/${i}`);
       pokemonPromises.push(apiData);
       i++;

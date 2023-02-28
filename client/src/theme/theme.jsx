@@ -15,7 +15,7 @@ export const theme = {
     colors: {
       background: "rgb(245, 235, 228)",
       text: "rgb(51, 51, 51)",
-      grayed: "rgb(150, 137, 137)",
+      grayed: "rgba(150, 137, 137, 0.5)",
       primary: "rgb(244, 224, 215)",
       secondary: "rgb(244, 213, 203)",
       tertiary: "rgb(240, 165, 165)",
@@ -29,7 +29,7 @@ export const theme = {
     colors: {
       background: "rgb(24, 18, 28)",
       text: "rgb(255, 255, 255)",
-      grayed: "rgb(128, 128, 136)",
+      grayed: "rgba(128, 128, 136, 0.5)",
       primary: "rgb(40, 30, 53)",
       secondary: "rgb(53, 41, 80)",
       tertiary: "rgb(82, 58, 143)",

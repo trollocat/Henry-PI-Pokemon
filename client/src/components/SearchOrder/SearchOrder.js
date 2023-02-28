@@ -33,7 +33,7 @@ const SearchOrder = () => {
           id="name"
           defaultValue="0"
         >
-          <Option value="0" disabled></Option>
+          <Option value="0" disabled style={{display:"none"}}></Option>
           <Option value="asc">a → z</Option>
           <Option value="desc">z → a</Option>
         </Select>
@@ -46,7 +46,7 @@ const SearchOrder = () => {
           id="attack"
           defaultValue="0"
         >
-          <Option value="0" disabled></Option>
+          <Option value="0" disabled style={{display:"none"}}></Option>
           <Option value="desc">high → low</Option>
           <Option value="asc">low → high</Option>
         </Select>

@@ -40,15 +40,24 @@ export const LabelWrapper = styled.div`
 
 export const Label = styled.img`
   width: 5.3rem;
-  transition: 300ms ease-in-out;
-  filter: grayscale(100%);
-  opacity: 55%;
+  transition: 100ms ease-in-out;
   cursor: pointer;
 
+  &:hover {
+    transform: scale(115%);
+    filter: saturate(100%);
+    opacity: 100%;
+  }
+
   ${(props) =>
-    props.selected &&
-    css`
-      filter: none;
-      opacity: 100%;
-    `}
+    props.selected
+    ? css`
+          filter: none;
+          opacity: 100%;
+          transform: scale(115%);
+        `
+      : css`
+          filter: saturate(0%);
+          opacity: 50%;
+        `}
 `;

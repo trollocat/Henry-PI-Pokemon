@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  filterPokemonsBySource,
-  filterPokemonsByType,
-} from "../../redux/actions";
+import { filterPokemons } from "../../redux/actions";
 import {
   FilterContainer,
   Label,
@@ -15,29 +12,47 @@ import {
 } from "./StyledSearchFilter";
 
 const SearchFilter = ({ types }) => {
-  const [selectedTypes, setSelectedTypes] = useState([]);
-  const [checkedBoxes, setCheckedBoxes] = useState({ api: true, db: true });
+  const [selectedFilters, setSelectedFilters] = useState({
+    bySource: { api: true, db: true },
+    byType: [],
+  });
   const dispatch = useDispatch();
   const handleTypeClick = (name) => {
-    setSelectedTypes((prevSelectedTypes) => {
-      if (prevSelectedTypes.includes(name)) {
-        return prevSelectedTypes.filter((type) => type !== name);
+    setSelectedFilters((prevSelectedTypes) => {
+      if (prevSelectedTypes.byType.includes(name)) {
+        return {
+          ...selectedFilters,
+          byType: prevSelectedTypes.byType.filter((type) => type !== name),
+        };
       } else {
-        return [...prevSelectedTypes, name];
+        return {
+          ...selectedFilters,
+          byType: [...prevSelectedTypes.byType, name],
+        };
       }
     });
   };
   const handleSourceCheck = (source) => {
     if (source === "db")
-      setCheckedBoxes({ ...checkedBoxes, db: !checkedBoxes.db });
-    else setCheckedBoxes({ ...checkedBoxes, api: !checkedBoxes.api });
+      setSelectedFilters({
+        ...selectedFilters,
+        bySource: {
+          ...selectedFilters.bySource,
+          db: !selectedFilters.bySource.db,
+        },
+      });
+    else
+      setSelectedFilters({
+        ...selectedFilters,
+        bySource: {
+          ...selectedFilters.bySource,
+          api: !selectedFilters.bySource.api,
+        },
+      });
   };
   useEffect(() => {
-    dispatch(filterPokemonsByType(selectedTypes));
-  }, [dispatch, selectedTypes]);
-  useEffect(() => {
-    dispatch(filterPokemonsBySource(checkedBoxes));
-  }, [dispatch, checkedBoxes]);
+    dispatch(filterPokemons(selectedFilters));
+  }, [dispatch, selectedFilters]);
   return (
     <FilterContainer>
       <CheckboxesContainer>
@@ -63,7 +78,7 @@ const SearchFilter = ({ types }) => {
           <Label
             key={type.id}
             title={type.name}
-            selected={selectedTypes.includes(type.name)}
+            selected={selectedFilters.byType.includes(type.name)}
             onClick={() => handleTypeClick(type.name)}
             src={`/type_labels/${type.name}.png`}
           />

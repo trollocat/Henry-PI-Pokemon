@@ -6,10 +6,8 @@ const URL = "http://localhost:3001";
 export const FETCH_TYPES = "FETCH_TYPES";
 export const FETCH_POKEMONS = "FETCH_POKEMONS";
 export const SEARCH_POKEMONS = "SEARCH_POKEMONS";
-export const ORDER_BY_NAME = "ORDER_BY_NAME";
-export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
-export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
-export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
+export const ORDER_POKEMONS = "ORDER_POKEMONS";
+export const FILTER_POKEMONS = "FILTER_POKEMONS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 // actions
@@ -39,18 +37,12 @@ export const searchPokemons = (name) => {
   return { type: SEARCH_POKEMONS, payload: name };
 };
 
-export const orderPokemonsByName = (order) => {
-  return { type: ORDER_BY_NAME, payload: order };
-};
-export const orderPokemonsByAttack = (order) => {
-  return { type: ORDER_BY_ATTACK, payload: order };
+export const orderPokemons = (rules) => {
+  return { type: ORDER_POKEMONS, payload: rules };
 };
 
-export const filterPokemonsByType = (types) => {
-  return { type: FILTER_BY_TYPE, payload: types };
-};
-export const filterPokemonsBySource = (sources) => {
-  return { type: FILTER_BY_SOURCE, payload: sources };
+export const filterPokemons = (filters) => {
+  return { type: FILTER_POKEMONS, payload: filters };
 };
 
 export const setCurrentPage = (page) => {

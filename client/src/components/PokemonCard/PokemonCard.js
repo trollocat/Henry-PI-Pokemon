@@ -19,10 +19,7 @@ const PokemonCard = ({ name, image, id, types }) => {
 
   const handleImageError = () => {
     setImageSrc(defaultPokemonImage);
-  };
-
-  // auto scroll for type labels when they exceed 2
-  
+  };  
 
   return (
     <CardContainer className="card3d">
@@ -34,7 +31,7 @@ const PokemonCard = ({ name, image, id, types }) => {
           onError={handleImageError}
           alt={name}
         ></PokemonImage>
-        <LabelWrapper>
+        <LabelWrapper labelCount={types.length}>
           {types.map((type) => (
             <Label key={type} src={`/type_labels/${type}.png`} />
           ))}

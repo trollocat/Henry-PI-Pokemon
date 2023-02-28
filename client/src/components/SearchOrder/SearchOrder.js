@@ -1,8 +1,6 @@
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  orderPokemonsByAttack,
-  orderPokemonsByName,
-} from "../../redux/actions";
+import { orderPokemons } from "../../redux/actions";
 import {
   OrderContainer,
   SelectOption,
@@ -11,17 +9,21 @@ import {
 } from "./StyledSearchOrder";
 
 const SearchOrder = () => {
+  const [orderRules, setOrderRules] = useState({ name: null, attack: null });
   const dispatch = useDispatch();
 
   const onChangeHandler = (event) => {
-    console.log(event.target.value);
     if (event.target.id === "name") {
-      dispatch(orderPokemonsByName(event.target.value));
+      setOrderRules({ ...orderRules, name: event.target.value });
     }
     if (event.target.id === "attack") {
-      dispatch(orderPokemonsByAttack(event.target.value));
+      setOrderRules({ ...orderRules, attack: event.target.value });
     }
   };
+
+  useEffect(() => {
+    dispatch(orderPokemons(orderRules));
+  }, [dispatch, orderRules]);
 
   return (
     <OrderContainer>
@@ -33,7 +35,7 @@ const SearchOrder = () => {
           id="name"
           defaultValue="0"
         >
-          <Option value="0" disabled style={{display:"none"}}></Option>
+          <Option value="0" disabled style={{ display: "none" }}></Option>
           <Option value="asc">a → z</Option>
           <Option value="desc">z → a</Option>
         </Select>
@@ -46,7 +48,7 @@ const SearchOrder = () => {
           id="attack"
           defaultValue="0"
         >
-          <Option value="0" disabled style={{display:"none"}}></Option>
+          <Option value="0" disabled style={{ display: "none" }}></Option>
           <Option value="desc">high → low</Option>
           <Option value="asc">low → high</Option>
         </Select>

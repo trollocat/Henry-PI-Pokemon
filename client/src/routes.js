@@ -11,7 +11,7 @@ const Routes = () => (
     <Route exact path="/" component={Landing} />
     <Route path="/home" component={Home} />
     <Route path="/detail/:pokemonId" component={Detail} />
-    <Route path="/submit" component={Form} />
+    <Route path="/form" component={Form} />
   </Switch>
 );
 

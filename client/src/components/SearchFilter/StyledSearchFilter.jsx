@@ -44,17 +44,23 @@ export const Label = styled.img`
   cursor: pointer;
 
   &:hover {
-    transform: scale(115%);
-    filter: saturate(100%);
+    transform: scale(110%);
+    filter: saturate(50%);
     opacity: 100%;
   }
 
   ${(props) =>
     props.selected
-    ? css`
-          filter: none;
+      ? css`
+          filter: saturate(100%);
           opacity: 100%;
           transform: scale(115%);
+
+          &:hover {
+            filter: saturate(100%);
+            opacity: 100%;
+            transform: scale(115%);
+          }
         `
       : css`
           filter: saturate(0%);

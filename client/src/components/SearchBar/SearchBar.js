@@ -21,7 +21,7 @@ const SearchBar = () => {
   return (
     <InputContainer>
       <SearchInput
-        placeholder="search pokemon..."
+        placeholder="search pokémon..."
         value={search}
         onChange={onChangeHandler}
       ></SearchInput>

@@ -33,7 +33,7 @@ const Cards = () => {
             })
           ) : (
             <h2>
-              sorry, we couldn't find any pokemons matching your search
+              sorry, we couldn't find any pokémons matching your search
             </h2>
           )
         ) : (

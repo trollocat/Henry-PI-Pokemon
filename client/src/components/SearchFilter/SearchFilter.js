@@ -57,7 +57,7 @@ const SearchFilter = ({ types }) => {
     <FilterContainer>
       <CheckboxesContainer>
         <SourceLabelCheckbox>
-          <SourceLabel>show api pokemons:</SourceLabel>
+          <SourceLabel>show api pokémons:</SourceLabel>
           <SourceCheckbox
             type="checkbox"
             onChange={() => handleSourceCheck("api")}

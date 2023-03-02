@@ -7,50 +7,46 @@ import {
   FieldGrid,
   Field,
   FieldImage,
-  FieldFileInput,
   FieldLabel,
   InputField,
   SubmitButton,
   ImageStatsContainer,
   Label,
   LabelWrapper,
+  ValidationIndicator,
+  ErrorValidation,
+  SuccessMessage,
+  SuccessMessageContainer,
+  SuccessClose,
+  SuccessGoHome,
+  SuccessCreateNew,
 } from "./StyledFormPage";
 import { ReactComponent as Back } from "../../assets/icons/back.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { createPokemon, fetchPokemons, fetchTypes } from "../../redux/actions";
+import {
+  emptyErrors,
+  validate,
+  validRanges,
+  validNameLength,
+  isValid,
+} from "./validation";
 
 const Form = () => {
   // form
   const dispatch = useDispatch();
-  const [form, setForm] = useState({
+  const emptyForm = {
     name: "",
-    image: "",
-    hp: null,
-    attack: null,
-    defense: null,
-    speed: null,
-    height: null,
-    weight: null,
+    image: "../pokemon-default-image.png",
+    hp: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
     types: [],
-  });
-  const [errors, setErrors] = useState({
-    name: {
-      isNotEmail: "",
-      isEmpty: "",
-      invalidLength: "",
-    },
-    image: {},
-    hp: {
-      isEmpty: "",
-      invalidRange: "",
-    },
-    attack: {},
-    defense: {},
-    speed: {},
-    height: {},
-    weight: {},
-    types: {},
-  });
+  };
+  const [form, setForm] = useState(emptyForm);
   const onChangeHandler = (event) => {
     setForm({
       ...form,
@@ -61,9 +57,17 @@ const Form = () => {
     event.preventDefault();
     dispatch(createPokemon(form));
     dispatch(fetchPokemons);
+    setSuccess(true);
   };
 
-  // label selector
+  const [errors, setErrors] = useState(emptyErrors);
+  useEffect(() => {
+    validate(form, setErrors);
+  }, [form]);
+
+  const [success, setSuccess] = useState(false);
+
+  // types selector
   useEffect(() => {
     dispatch(fetchTypes());
   }, [dispatch]);
@@ -84,6 +88,15 @@ const Form = () => {
     });
   };
 
+  const numericalStats = [
+    "hp",
+    "attack",
+    "defense",
+    "speed",
+    "height",
+    "weight",
+  ];
+
   return (
     <MainContainer>
       <BackButton to="/home">
@@ -101,29 +114,67 @@ const Form = () => {
                 value={form.name}
                 onChange={onChangeHandler}
               ></InputField>
+              {Object.entries(errors.name).some(
+                ([, value]) => value !== ""
+              ) && (
+                <ErrorValidation name>
+                  {Object.entries(errors.name).map(
+                    ([, value]) =>
+                      value !== "" && (
+                        <>
+                          {value}
+                          <br />
+                        </>
+                      )
+                  )}
+                </ErrorValidation>
+              )}
+              <ValidationIndicator primary>
+                max {validNameLength}
+              </ValidationIndicator>
             </Field>
-            {["hp", "attack", "defense", "speed", "height", "weight"].map(
-              (stat) => (
-                <Field>
-                  <FieldLabel>{stat}</FieldLabel>
-                  <InputField
-                    name={stat}
-                    value={form.stat}
-                    onChange={onChangeHandler}
-                  ></InputField>
-                </Field>
-              )
+            {numericalStats.map((stat) => (
+              <Field key={stat}>
+                <FieldLabel>{stat}</FieldLabel>
+                <InputField
+                  name={stat}
+                  value={form[stat]}
+                  onChange={onChangeHandler}
+                ></InputField>
+                <ValidationIndicator>
+                  {validRanges[stat].min} - {validRanges[stat].max}
+                </ValidationIndicator>
+              </Field>
+            ))}
+            {numericalStats.some((stat) =>
+              Object.entries(errors[stat]).some(([, value]) => value !== "")
+            ) && (
+              <ErrorValidation stats>
+                {numericalStats.map((stat) =>
+                  Object.entries(errors[stat]).map(
+                    ([, value]) =>
+                      value !== "" && (
+                        <label key={stat}>
+                          {value}
+                          <br />
+                        </label>
+                      )
+                  )
+                )}
+              </ErrorValidation>
             )}
           </FieldGrid>
+          {Object.entries(errors.types).map(
+            ([, value]) =>
+              value !== "" && <ErrorValidation types>{value}</ErrorValidation>
+          )}
           <Field image>
-            {form.image && (
-              <Field image>
-                <FieldImage
-                  alt="pokemon"
-                  src={form.image}
-                />
-              </Field>
+            {errors.image.isEmpty && (
+              <ErrorValidation image>{errors.image.isEmpty}</ErrorValidation>
             )}
+            <Field image>
+              <FieldImage alt="pokemon" src={form.image} />
+            </Field>
             <Field image>
               <FieldLabel>image url</FieldLabel>
               <InputField
@@ -147,8 +198,30 @@ const Form = () => {
           ))}
         </LabelWrapper>
 
-        <SubmitButton type="submit">submit</SubmitButton>
+        <SubmitButton type="submit" disabled={!isValid(errors)}>
+          submit
+        </SubmitButton>
       </FormContainer>
+      {success && (
+        <SuccessMessageContainer>
+          <SuccessClose
+            onClick={() => {
+              setSuccess(false);
+            }}
+          >
+            x
+          </SuccessClose>
+          <SuccessMessage>pokémon created successfully!</SuccessMessage>
+          <SuccessCreateNew
+            onClick={() => {
+              setSuccess(false);
+              setForm(emptyForm);
+            }}
+          >
+            create new from scratch
+          </SuccessCreateNew>
+        </SuccessMessageContainer>
+      )}
     </MainContainer>
   );
 };

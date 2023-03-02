@@ -10,7 +10,8 @@ export const CreatePokemonContainer = styled.div`
   top: 12rem;
   width: 27.2rem;
   z-index: 11;
-  transition: 200ms linear;
+  transition: 200ms ease-out;
+  height: 0;
 
   ${(props) =>
     props.dropdown &&
@@ -33,7 +34,7 @@ export const DropdownButton = styled.button`
   width: 100%;
   background-color: ${(props) => props.theme.colors.primary};
   cursor: pointer;
-  transition: 200ms linear;
+  transition: 200ms ease-out;
 
   ${(props) =>
     props.dropdown &&
@@ -103,7 +104,7 @@ export const CreationButton = styled(Link)`
     color: ${(props) => props.theme.colors.text};
     font-size: 1.6rem;
   }
-
+  
   ${(props) =>
     props.dropdown &&
     css`

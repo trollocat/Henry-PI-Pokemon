@@ -43,6 +43,7 @@ export const FieldGrid = styled.div`
 
 export const Field = styled.div`
   --padding-vertical: 1.65rem;
+  position: relative;
   display: flex;
   justify-content: right;
   font-size: 1.4rem;
@@ -70,10 +71,9 @@ export const Field = styled.div`
       justify-content: center;
       height: 21rem;
       width: 100%;
+      gap: 0;
     `};
 `;
-
-export const FieldFileInput = styled.input``;
 
 export const FieldImage = styled.img`
   max-height: 12rem;
@@ -105,6 +105,23 @@ export const InputField = styled.input`
     `};
 `;
 
+export const ValidationIndicator = styled.label`
+  position: absolute;
+  bottom: 0;
+  left: 41%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: right;
+  color: ${(props) => props.theme.colors.grayed};
+  font-size: 1.3rem;
+
+  ${(props) =>
+    props.primary &&
+    css`
+      left: 46%;
+    `};
+`;
+
 export const ImageStatsContainer = styled.div`
   display: flex;
   align-items: center;
@@ -125,7 +142,7 @@ export const Label = styled.img`
   cursor: pointer;
 
   &:hover {
-    transform: scale(110%);
+    transform: scale(105%);
     filter: saturate(50%);
     opacity: 100%;
   }
@@ -162,8 +179,137 @@ export const SubmitButton = styled.button`
   border-radius: 0.5rem;
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.primary};
+  outline: 3px solid ${(props) => props.theme.colors.tertiary};
+  transition: 300ms ease-in-out;
+
+  &:hover {
+    transition: 75ms ease-out;
+    background-color: ${(props) => props.theme.colors.tertiary};
+  }
+
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.grayed};
+    color: ${(props) => props.theme.colors.grayed};
+    text-shadow: 0px 0px 4px ${(props) => props.theme.colors.grayed};
+    cursor: not-allowed;
+    outline: 0px;
+  }
+`;
+
+export const ErrorValidation = styled.div`
+  width: max-content;
+  padding: 3px 10px;
+  position: absolute;
+  right: 100%;
+  bottom: 20%;
+  z-index: 9999;
+  font-size: 1.3rem;
+  color: ${(props) => props.theme.colors.accent};
+  border: solid 1px ${(props) => props.theme.colors.tertiary};
+  background-color: ${(props) => props.theme.colors.secondary};
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1),
+    inset 0px 0px 3px ${(props) => props.theme.colors.background};
+  height: fit-content;
+  ${(props) =>
+    props.name &&
+    css`
+      right: calc(100% + 1.6rem);
+    `}
+  ${(props) =>
+    props.stats &&
+    css`
+      top: 45%;
+    `}
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+  }
+  &:before {
+    transform: rotate(180deg);
+    border-right-color: ${(props) => props.theme.colors.tertiary};
+    border-width: 8px;
+    top: 10px;
+    margin-top: -8px;
+  }
+  &:after {
+    transform: rotate(180deg);
+    border-right-color: ${(props) => props.theme.colors.secondary};
+    border-width: 6px;
+    top: 10px;
+    margin-top: -6px;
+  }
+  ${(props) =>
+    props.image &&
+    css`
+      right: unset;
+      left: 100%;
+      top: 72%;
+      &:before,
+      &:after {
+        left: unset;
+        right: 100%;
+        transform: rotate(0deg);
+      }
+      &:before {
+      }
+      &:after {
+      }
+    `}
+`;
+
+export const SuccessMessageContainer = styled.div`
+  ${WidgetA};
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 18rem;
+  width: 34rem;
+`;
+
+export const SuccessMessage = styled.label`
+  font-size: 2.3rem;
+  text-shadow: 1px 1px 1px ${(props) => props.theme.colors.accent};
+`;
+
+const ButtonB = css`
+  ${WidgetA};
+  font-size: 1.5rem;
+  border-radius: 0.2rem;
+  border: 0;
+  font-family: signika;
+  background-color: ${(props) => props.theme.colors.secondary};
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: 1.5rem;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.tertiary};
   }
+`;
+
+export const SuccessClose = styled.button`
+  ${ButtonB};
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  `;
+
+export const SuccessCreateNew = styled.button`
+  ${ButtonB};
+  position: absolute;
+  width: 20rem;
+  bottom: 0;
 `;

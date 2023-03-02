@@ -60,9 +60,9 @@ const reducer = (state = initialState, { type, payload }) => {
         );
       // attack
       if (payload.attack === "asc")
-        orderedPokemons = state.pokemons.sort((a, b) => a.attack - b.attack);
+      orderedPokemons = state.pokemons.sort((a, b) => a.attack - b.attack);
       if (payload.attack === "desc")
-        orderedPokemons = state.pokemons.sort((a, b) => b.attack - a.attack);
+      orderedPokemons = state.pokemons.sort((a, b) => b.attack - a.attack);
       return {
         ...state,
         orderedPokemons: orderedPokemons,

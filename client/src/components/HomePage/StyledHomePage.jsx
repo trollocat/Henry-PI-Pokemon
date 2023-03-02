@@ -6,6 +6,5 @@ export const BigContainer = styled.div`
   flex-direction: column;
   height: 100vh;
   color: ${(props) => props.theme.colors.text};
-  /* background-color: ${(props) => props.theme.colors.background}; */
-  background: url(${(props) => props.theme.tileBackground}) repeat;
+  background: url(${(props) => "../" + props.theme.tileBackground}) repeat;
 `;

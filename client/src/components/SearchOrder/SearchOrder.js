@@ -9,6 +9,7 @@ import {
 } from "./StyledSearchOrder";
 
 const SearchOrder = () => {
+  const [mounted, setMounted] = useState(false);
   const [orderRules, setOrderRules] = useState({ name: null, attack: null });
   const dispatch = useDispatch();
 
@@ -22,7 +23,12 @@ const SearchOrder = () => {
   };
 
   useEffect(() => {
-    dispatch(orderPokemons(orderRules));
+    if (mounted) {
+      dispatch(orderPokemons(orderRules));
+    } else {
+      setMounted(true);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, orderRules]);
 
   return (

@@ -8,8 +8,7 @@ import {
 } from "./StyledCards";
 import PokemonCard from "../PokemonCard/PokemonCard";
 
-const Cards = () => {
-  const { allPokemons, pokemons, currentPage } = useSelector((state) => state);
+const Cards = ({ allPokemons, pokemons, currentPage }) => {
   let slicedPokemons = pokemons?.slice(
     (currentPage - 1) * 12,
     currentPage * 12

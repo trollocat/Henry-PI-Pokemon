@@ -10,7 +10,7 @@ const Search = () => {
     <SearchContainer>
       <SearchBar></SearchBar>
       <SearchOrder></SearchOrder>
-      {types.length ? <SearchFilter types={types}></SearchFilter> : "hola"}
+      {types.length ? <SearchFilter types={types}></SearchFilter> : "failed to load types"}
     </SearchContainer>
   );
 };

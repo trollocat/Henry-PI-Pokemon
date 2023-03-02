@@ -6,6 +6,7 @@ import {
   PokemonImage,
   LabelWrapper,
   Label,
+  ThreeDots
 } from "./StyledPokemonCard";
 
 const PokemonCard = ({ name, image, id, types }) => {
@@ -36,6 +37,7 @@ const PokemonCard = ({ name, image, id, types }) => {
             <Label key={type} src={`/type_labels/${type}.png`} />
           ))}
         </LabelWrapper>
+        {types.length>2 && <ThreeDots>...</ThreeDots>}
       </DetailLink>
     </CardContainer>
   );

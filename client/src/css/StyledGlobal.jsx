@@ -12,15 +12,15 @@ export const StyledGlobal = createGlobalStyle`
 
     @font-face {
     font-family: 'Signika';
-    src: local('Signika'), url('Signika-VariableFont_wght.tff');
+    src: local('Signika'), url('../Signika-VariableFont_wght.tff');
     }
     @font-face {
       font-family: "Highway-Gothic";
-      src: local("Highway-Gothic"), url("Highway-Gothic.ttf");
+      src: local("Highway-Gothic"), url("../Highway-Gothic.ttf");
     }
     @font-face {
       font-family: "Geometos";
-      src: local("Geometos"), url("Geometos.ttf");
+      src: local("Geometos"), url("../Geometos.ttf");
     }
   }
 `;

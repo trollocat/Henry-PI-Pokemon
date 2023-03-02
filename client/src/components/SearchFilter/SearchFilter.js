@@ -12,6 +12,7 @@ import {
 } from "./StyledSearchFilter";
 
 const SearchFilter = ({ types }) => {
+  const [mounted, setMounted] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     bySource: { api: true, db: true },
     byType: [],
@@ -51,7 +52,12 @@ const SearchFilter = ({ types }) => {
       });
   };
   useEffect(() => {
-    dispatch(filterPokemons(selectedFilters));
+    if (mounted) {
+      dispatch(filterPokemons(selectedFilters));
+    } else {
+      setMounted(true);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, selectedFilters]);
   return (
     <FilterContainer>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { TitleA } from "../../css/DesignPatterns/TitleA";
 
 export const BigContainer = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const BigContainer = styled.div`
   flex-direction: column;
   gap: 32rem;
   min-height: 100%;
-  background: url(${(props) => props.theme.splashScreen}) no-repeat center
+  background: url(${(props) => "../" + props.theme.splashScreen}) no-repeat center
     center fixed;
   background-size: cover;
 
@@ -16,12 +17,7 @@ export const BigContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin: 0;
-  font-size: 6em;
-  text-align: center;
-  color: ${(props) => props.theme.colors.text};
-  text-shadow: 1px 2px 2px ${(props) => props.theme.colors.accent},
-    0 0 6px ${(props) => props.theme.colors.background};
+  ${TitleA}
 `;
 
 export const HomeLink = styled(Link)`

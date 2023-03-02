@@ -12,15 +12,17 @@ import { fetchPokemons, fetchTypes } from "../../redux/actions";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { types, allPokemons, pokemons, currentPage, refresh } = useSelector(
+    (state) => state
+  );
   useEffect(() => {
     if (!types.length) dispatch(fetchTypes());
     if (!pokemons.length) dispatch(fetchPokemons());
-
+    if (refresh) {
+      dispatch(fetchPokemons());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-  const { types, allPokemons, pokemons, currentPage } = useSelector(
-    (state) => state
-  );
   return (
     <BigContainer>
       <BackButton to="/">

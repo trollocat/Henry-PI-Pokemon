@@ -14,7 +14,7 @@ export const CreatePokemonContainer = styled.div`
   height: 0;
 
   ${(props) =>
-    props.dropdown &&
+    props.dropdown === "true" &&
     css`
       ${WidgetA}
       background-color: ${(props) => props.theme.colors.primary};
@@ -37,7 +37,7 @@ export const DropdownButton = styled.button`
   transition: 200ms ease-out;
 
   ${(props) =>
-    props.dropdown &&
+    props.dropdown === "true" &&
     css`
       background-color: ${(props) => props.theme.colors.secondary};
       height: 3em;
@@ -54,7 +54,7 @@ export const DropdownText = styled.label`
   color: ${(props) => props.theme.colors.text};
 
   ${(props) =>
-    props.dropdown &&
+    props.dropdown === "true" &&
     css`
       opacity: 0%;
     `}
@@ -63,7 +63,7 @@ export const DropdownText = styled.label`
 export const DropdownSVG = styled.div`
   fill: ${(props) => props.theme.colors.text};
   ${(props) =>
-    props.dropdown &&
+    props.dropdown === "true" &&
     css`
       transform: rotate(180deg);
     `}
@@ -77,7 +77,7 @@ export const LinkToCreation = styled.div`
   justify-content: center;
 
   ${(props) =>
-    props.dropdown &&
+    props.dropdown === "true" &&
     css`
       opacity: 100%;
     `}
@@ -106,7 +106,7 @@ export const CreationButton = styled(Link)`
   }
   
   ${(props) =>
-    props.dropdown &&
+    props.dropdown === "true" &&
     css`
       pointer-events: all;
       opacity: 100%;

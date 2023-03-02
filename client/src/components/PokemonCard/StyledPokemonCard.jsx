@@ -69,6 +69,7 @@ export const LabelWrapper = styled.div`
   ${(props) =>
     props.labelCount > 2 &&
     css`
+      justify-content: left;
       &:hover {
         overflow-x: scroll;
         padding-bottom: 0.8em;

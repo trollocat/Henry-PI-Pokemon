@@ -18,7 +18,6 @@ import {
   SuccessMessage,
   SuccessMessageContainer,
   SuccessClose,
-  SuccessGoHome,
   SuccessCreateNew,
 } from "./StyledFormPage";
 import { ReactComponent as Back } from "../../assets/icons/back.svg";
@@ -110,6 +109,7 @@ const Form = () => {
               <FieldLabel primary>name</FieldLabel>
               <InputField
                 primary
+                autoComplete="off"
                 name="name"
                 value={form.name}
                 onChange={onChangeHandler}
@@ -137,6 +137,7 @@ const Form = () => {
               <Field key={stat}>
                 <FieldLabel>{stat}</FieldLabel>
                 <InputField
+                  autoComplete="off"
                   name={stat}
                   value={form[stat]}
                   onChange={onChangeHandler}
@@ -155,7 +156,7 @@ const Form = () => {
                     ([, value]) =>
                       value !== "" && (
                         <label key={stat}>
-                          {value}
+                          {value ? value : ""}
                           <br />
                         </label>
                       )

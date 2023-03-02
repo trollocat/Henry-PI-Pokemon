@@ -10,7 +10,7 @@ typeRouter.get("/", async (req, res) => {
     if (Object.keys(dbTypes).length) {
       return res.status(200).json(dbTypes);
     }
-    // if no db, api then save to db
+    // if no db, then api saves to db
     const allTypes = await getTypeData();
     const savedTypes = await saveTypeData(allTypes);
     return res.status(200).json(savedTypes);

@@ -12,20 +12,20 @@ import { useState } from "react";
 const CreatePokemon = () => {
   const [dropdown, setDropdown] = useState(false);
   return (
-    <CreatePokemonContainer dropdown={dropdown}>
+    <CreatePokemonContainer dropdown={dropdown.toString()}>
       <DropdownButton
-        dropdown={dropdown}
+        dropdown={dropdown.toString()}
         onClick={() => {
           setDropdown(!dropdown);
         }}
       >
-        <DropdownText dropdown={dropdown}>create pokémon</DropdownText>
-        <DropdownSVG dropdown={dropdown}>
+        <DropdownText dropdown={dropdown.toString()}>create pokémon</DropdownText>
+        <DropdownSVG dropdown={dropdown.toString()}>
           <DownSVG width="1.5em" />
         </DropdownSVG>
       </DropdownButton>
-      <LinkToCreation dropdown={dropdown}>
-        <CreationButton dropdown={dropdown} to="/form">
+      <LinkToCreation dropdown={dropdown.toString()}>
+        <CreationButton dropdown={dropdown.toString()} to="/form">
           take me there
         </CreationButton>
       </LinkToCreation>

@@ -10,7 +10,7 @@ export const MainContainer = styled.div`
   height: 100vh;
   color: ${(props) => props.theme.colors.text};
   /* background-color: ${(props) => props.theme.colors.background}; */
-  background: url(${(props) => props.theme.tileBackground}) repeat;
+  background: url(${(props) => "../" + props.theme.tileBackground}) repeat;
 `;
 
 export const FormContainer = styled.form`

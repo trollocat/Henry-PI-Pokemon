@@ -39,7 +39,7 @@ const SearchOrder = () => {
           onChange={onChangeHandler}
           name="name"
           id="name"
-          defaultValue="0"
+          value={orderRules.name ? orderRules.name === "a → z" ? "asc" : "desc" : 0}
         >
           <Option value="0" disabled style={{ display: "none" }}></Option>
           <Option value="asc">a → z</Option>
@@ -52,7 +52,7 @@ const SearchOrder = () => {
           onChange={onChangeHandler}
           name="attack"
           id="attack"
-          defaultValue="0"
+          value={orderRules.attack ? orderRules.attack === "high → low" ? "desc" : "asc" : 0}
         >
           <Option value="0" disabled style={{ display: "none" }}></Option>
           <Option value="desc">high → low</Option>

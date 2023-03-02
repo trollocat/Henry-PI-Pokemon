@@ -42,7 +42,6 @@ export const validate = (form, setErrors) => {
   for (const field in errors) {
     if (errors[field].hasOwnProperty("isEmpty") && !form[field]) {
       errors[field].isEmpty = `${field} cannot be empty`;
-      console.log(errors[field].isEmpty);
     }
   }
 
@@ -54,7 +53,6 @@ export const validate = (form, setErrors) => {
       form[field]
     ) {
       errors[field].isNumber = `${field} must be a number`;
-      console.log(errors[field].isNumber);
     }
   }
 
@@ -68,7 +66,6 @@ export const validate = (form, setErrors) => {
         errors[
           field
         ].invalidRange = `${field} must be within ${min} and ${max}`;
-        console.log(errors[field].invalidRange);
       }
     }
   }

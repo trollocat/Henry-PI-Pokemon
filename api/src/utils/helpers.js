@@ -6,7 +6,7 @@ module.exports = {
     return {
       id: pokemon.id,
       name: pokemon.forms[0].name,
-      image: pokemon.sprites.other["official-artwork"].front_default,
+      image: pokemon.sprites.other["official-artwork"].front_shiny,
       hp: pokemon.stats[0].base_stat,
       attack: pokemon.stats[1].base_stat,
       defense: pokemon.stats[2].base_stat,

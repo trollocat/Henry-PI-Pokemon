@@ -5,6 +5,7 @@ import {
   FETCH_TYPES,
   SET_CURRENT_PAGE,
   SEARCH_POKEMONS,
+  CREATE_POKEMON,
 } from "./actions";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   pokemons: [],
   currentPage: 1,
   totalPages: 0,
+  refresh: false,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -31,6 +33,12 @@ const reducer = (state = initialState, { type, payload }) => {
         orderedPokemons: payload,
         pokemons: payload,
         totalPages: Math.ceil(payload.length / 12),
+        refresh: false,
+      };
+    case CREATE_POKEMON:
+      return {
+        ...state,
+        refresh: true,
       };
     case SEARCH_POKEMONS:
       let resultPokemons = [];
@@ -60,9 +68,9 @@ const reducer = (state = initialState, { type, payload }) => {
         );
       // attack
       if (payload.attack === "asc")
-      orderedPokemons = state.pokemons.sort((a, b) => a.attack - b.attack);
+        orderedPokemons = state.pokemons.sort((a, b) => a.attack - b.attack);
       if (payload.attack === "desc")
-      orderedPokemons = state.pokemons.sort((a, b) => b.attack - a.attack);
+        orderedPokemons = state.pokemons.sort((a, b) => b.attack - a.attack);
       return {
         ...state,
         orderedPokemons: orderedPokemons,
@@ -76,8 +84,6 @@ const reducer = (state = initialState, { type, payload }) => {
       const apiPokemons = state.orderedPokemons.filter((pokemon) =>
         Number(pokemon.id)
       );
-      console.log(dbPokemons);
-      console.log(apiPokemons);
       if (payload.bySource.db)
         combinedPokemons = [...combinedPokemons, ...dbPokemons];
       if (payload.bySource.api)
